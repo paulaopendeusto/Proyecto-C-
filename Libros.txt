@@ -1,0 +1,15 @@
+Titulo: El niño con el pijama de rayas
+Autor: Prueba
+Genero: Prueba
+Stock: 5
+Codigo:124
+Titulo: dune
+Autor: Frank Herbert
+Genero: Ciencia Ficcion
+Stock: 6
+Codigo: 125
+Titulo: El se¤or de los anillos
+Autor: JRR Talkien
+Genero: Aventura
+Stock: 5
+Codigo: 126

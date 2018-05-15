@@ -1,0 +1,9 @@
+Nombre: I¤igo 
+Apellido: Peinado
+Edad: 22
+DNI: 72606311A
+Curso: 4
+Nombre: Paula
+Apellido: Elósegui
+Edad: 22
+Curso: 4
