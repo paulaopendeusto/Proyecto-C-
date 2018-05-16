@@ -6,4 +6,5 @@ Curso: 4
 Nombre: Paula
 Apellido: Elósegui
 Edad: 22
+DNI:72593622X
 Curso: 4

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-Cliente::Cliente(const string nombre, const string apellido, const int edad, const int DNI, const int curso)
+Cliente::Cliente(const string nombre, const string apellido, const int edad, const string DNI, const int curso)
 {
 	this->nombre= nombre;
 	this->apellido=apellido;

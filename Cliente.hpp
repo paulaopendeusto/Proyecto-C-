@@ -10,18 +10,18 @@ class Usuario
 	string nombre;
 	string apellido;
 	int edad;
-	int DNI;
+	string DNI;
 	int curso;
 
 public: 
 	Usuario() {}
 
-	Usuario(const string nombre, const string apellido, const int edad, const int DNI, const int curso);
+	Usuario(const string nombre, const string apellido, const int edad, const string DNI, const int curso);
 
 	const string getNombre() const {return nombre;}
 	const string getApellido() const {return apellido;}
 	const int getEdad() const {return edad;}
-	const int getDNI() const {return DNI;}
+	const string getDNI() const {return DNI;}
 	const int getCurso() const {return curso;}
 
 	friend istream& operator>>(istream& in, Cliente& c);
