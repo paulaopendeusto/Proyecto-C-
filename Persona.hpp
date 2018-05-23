@@ -1,4 +1,4 @@
-#infndef _PERSONA_H
+#ifndef _PERSONA_H
 #define _PERSONA_H
 
 class Persona
@@ -10,7 +10,7 @@ public:
 
 	Persona();
 	Persona(const char*nombre, const char* apellido);
-	Persona(cons Persona &p);
+	Persona(const Persona &p);
 	virtual ~Persona();
 
 	const char* getNombre() const;

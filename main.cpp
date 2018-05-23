@@ -2,9 +2,21 @@
 #include <string.h>
 #include <stdlib.h>
 #include "gestion.h"
+#include "gestion.hpp"
+#include "Persona.hpp"
+#include "Admin.hpp"
+#include "Cliente.hpp"
+#include "DBConnector.hpp"
 
 #define MAX_LENGHT 50
 
+using namespace std;
+
+int dni;
+string nombre;
+string apellido;
+int edad;
+int curso;
 
 int menuCliente(void)
 {
@@ -95,35 +107,15 @@ int main(int argc, char **argv, char **vectorClientes)
 
 				switch (option)
 				{
-					case 1: 
-
-						listaLibros();				
-						break;
-
+					
 					case 2:
 
-						listaClientes();
-						break;
-
+					listaClientes();
+					break;
+					
 					case 3:
-
-						nuevoCliente();
-						break;
-
-					case 4:
-
-						nuevoLibro();
-						break;
-
-					case 5:
-
-						eliminarLibro();
-						break;
-
-					case 6: 
-
-						listaLibrosAlquilados();
-						break;
+					nuevoCliente(dni, nombre, apellido, edad, curso);
+					break;
 
 					default:
 						return -1;
@@ -144,21 +136,7 @@ int main(int argc, char **argv, char **vectorClientes)
 				
 					switch (option)
 					{
-						case 1: 
-							
-							listaLibros();				
-							break;
-
-						case 2:
-
-							alquilarLibro();
-							break;
-
-						case 3:
-
-							eliminarCliente();
-							break;					
-							
+						
 
 						default:
 						return -1;
