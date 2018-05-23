@@ -1,0 +1,12 @@
+Compilación en línea de comandos
+:
+
+1. Compilar el fichero con código C sqlite3.c usando: gcc sqlite3.c -c
+
+2. El paso anterior genera un fichero llamado sqlite3.o
+
+3. Compilar el código C++ con: g++ main.cpp sqlite3.o gestion.cpp -o main //Lo he he compilado asi porque no me importaban las clases en ese momento
+
+
+4. Ejecutar: main.exe
+
