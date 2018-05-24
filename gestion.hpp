@@ -11,6 +11,6 @@ using namespace std;
 
 void nuevoCliente(int dni, string nombre, string apellido, int edad, int curso);
 void listaClientes();
-
+void vaciarClientes();
 
 #endif

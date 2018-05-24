@@ -168,6 +168,42 @@ int nuevoCliente(int dni, string nombre, string apellido, int edad, int curso)
     return SQLITE_OK;
   }
 
+
+  int vaciarClientes()
+  {
+     sqlite3_stmt *stmt;
+
+    char sql[] = "delete from cliente";
+
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    if (result != SQLITE_OK) 
+    {
+      std::cout << "Error preparing statement (DELETE)" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+    std::cout << "SQL query prepared (DELETE)" << std::endl;
+
+    result = sqlite3_step(stmt);
+    if (result != SQLITE_DONE) {
+      std::cout << "Error deleting data (DELETE)" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) {
+      std::cout << "Error finalizing statement (DELETE)" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+    std::cout << "Prepared statement finalized (DELETE)" << std::endl;
+
+    return SQLITE_OK;
+  }
+
 };
 
 #endif

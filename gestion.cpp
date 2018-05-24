@@ -15,11 +15,7 @@ DBConnector dbConnector("test.sqlite");
 int result;
 
 void nuevoCliente(int dni, std :: string nombre, std :: string apellido, int edad, int curso)
-{
-	
-  
-  
-  
+{  
   cout << "Nombre: ";
   cin >> nombre;
   cout << "Apellido: ";
@@ -48,4 +44,14 @@ void listaClientes()
     std::cout << "Error getting all clientes" << std::endl;
     
   }
+}
+
+
+void vaciarClientes()
+{
+   result=dbConnector.vaciarClientes();
+    if (result != SQLITE_OK) {
+      std::cout << "Error deleting all countries" << std::endl;
+      
+    }
 }

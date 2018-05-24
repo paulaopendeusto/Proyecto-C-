@@ -63,7 +63,7 @@ int menuAdministrador(void)
 		printf("1. Lista de libros disponibles para alquilar\n");
 		printf("2. Lista de clientes de la biblioteca de Deusto\n");
 		printf("3. Introducir un nuevo cliente\n");
-		printf("4. Introducir un nuevo libro \n");
+		printf("4. vaciarClientes \n");
 		printf("5. Eliminar un libro \n");
 		printf("6. Lista de libros alquilados\n");
 		printf("7. EXIT\n");
@@ -116,6 +116,11 @@ int main(int argc, char **argv, char **vectorClientes)
 					case 3:
 					nuevoCliente(dni, nombre, apellido, edad, curso);
 					break;
+					
+					case 4:
+					vaciarClientes();
+					break;
+					
 
 					default:
 						return -1;
@@ -136,8 +141,6 @@ int main(int argc, char **argv, char **vectorClientes)
 				
 					switch (option)
 					{
-						
-
 						default:
 						return -1;
 						break;
