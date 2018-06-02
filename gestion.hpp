@@ -17,4 +17,9 @@ void nuevoLibro(int codigo, string titulo, string autor, string genero, int stoc
 void listaLibros();
 void vaciarLibros();
 
+void buscarLibro();
+void buscarCliente();
+
+void alquilar();
+
 #endif

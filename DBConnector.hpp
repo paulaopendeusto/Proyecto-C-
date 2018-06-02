@@ -41,6 +41,14 @@ public:
       std::cout << "Error executing CREATE" << std::endl;      
       std::cout << sqlite3_errmsg(db) << std::endl;    
     }
+
+    char sql2[] = "CREATE TABLE alquiler (dni int, codigo int);";
+    result = sqlite3_exec(db, sql2, 0, 0, NULL);
+
+    if (result != SQLITE_OK) {
+      std::cout << "Error executing CREATE" << std::endl;      
+      std::cout << sqlite3_errmsg(db) << std::endl;    
+    }
     
   }
   
@@ -66,8 +74,7 @@ int nuevoCliente(int dni, string nombre, string apellido, int edad, int curso)
       return result;
     }
 
-    std::cout << "SQL query prepared (INSERT)" << std::endl;
-
+   
     result = sqlite3_bind_int(stmt, 1, dni);
     if (result != SQLITE_OK) {
       std::cout << "Error binding parameters" << std::endl;
@@ -367,7 +374,187 @@ int nuevoLibro(int codigo, string titulo, string autor, string genero, int stock
     return SQLITE_OK;
   }
 
+int buscarLibro() 
+  {
+    sqlite3_stmt *stmt;
+
+    char sql[] = "select codigo, titulo, stock from libro";
+
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    if (result != SQLITE_OK) {
+      std::cout << "Error preparing statement (SELECT)" << std::endl;      
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+    int codigo;
+    int cl; // codigo del libro introducido
+    char titulo[100];
+    char autor[100];
+    char genero[100];
+    int stock;
+    int dnic; //dni del cliente introducido
+    char nombre[100];
+
+
+    listaLibros();
+
+    cout<< "Introduce el codigo del libro que desea alquilar"<<endl;
+    cin>>cl;
+
+
+     do 
+    {
+      result = sqlite3_step(stmt);
+      if (result == SQLITE_ROW) 
+      {
+                 
+        if(cl==sqlite3_column_int(stmt,0))
+        {
+          strcpy(titulo, (char *) sqlite3_column_text(stmt, 1));
+          stock=sqlite3_column_int(stmt,4);
+          cout <<"Libro seleccionado -->  CODIGO: " << cl << " Titulo: " << titulo <<endl;
+
+        }
+        else
+        {
+          cout<<"No existe ningun libro con ese codigo"<<endl;
+          buscarLibro();
+        }
+
+      }
+    } while (result == SQLITE_ROW);
+
+    
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) 
+    {
+      std::cout << "Error finalizing statement (SELECT)" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+   
+
+    return cl;
+    return SQLITE_OK;
+  }
+
+int buscarCliente() 
+  {
+    sqlite3_stmt *stmt;
+
+    char sql[] = "select dni, nombre from cliente";
+
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    if (result != SQLITE_OK) {
+      std::cout << "Error preparing statement (SELECT)" << std::endl;      
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+
+    int dnic; //dni del cliente introducido
+    char nombre[100];
+
+
+    cout<< "Introduce el dni ppara realizar la reserva"<<endl;
+    cin>>dnic;
+
+
+     do 
+    {
+      result = sqlite3_step(stmt);
+      if (result == SQLITE_ROW) 
+      {
+                 
+        if(dnic==sqlite3_column_int(stmt,0))
+        {
+          strcpy(nombre, (char *) sqlite3_column_text(stmt, 1));
+          cout <<"Eres tu? -->  dni: " << dnic << " Nombre: " << nombre <<endl;
+
+        }
+        else
+        {
+          cout<<"No existe ningun cliente con ese dni"<<endl;
+          buscarCliente();
+        }
+
+      }
+    } while (result == SQLITE_ROW);
+
+  
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) 
+    {
+      std::cout << "Error finalizing statement (SELECT)" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+   
+
+    return dnic;
+    return SQLITE_OK;
+  }
+
+  int alquilar()
+  {
+    int dni;
+    int codigo;
+    char nombre[100];
+    int stock;
+
+    codigo=buscarLibro();
+    
+    dni= buscarCliente();
+
+
+    sqlite3_stmt *stmt;
+
+    char sql[] = "insert into alquiler (dni, codigo) values (?, ?)";
+    int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+    if (result != SQLITE_OK) {
+      std::cout << "Error preparing statement (INSERT)" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+    result = sqlite3_bind_int(stmt, 1, dni);
+    if (result != SQLITE_OK) {
+      std::cout << "Error binding parameters" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+    result = sqlite3_bind_int(stmt, 2, codigo);
+    if (result != SQLITE_OK) {
+      std::cout << "Error binding parameters" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+    result = sqlite3_step(stmt);
+    if (result != SQLITE_DONE) {
+      std::cout << "Error inserting new data into alquiler table" << std::endl;
+      return result;
+    }
+
+  
+    std::cout << std::endl;
+    std::cout << "Su alquiler se ha realizado con existo!!!" << std::endl;
+    std::cout << std::endl;
+    std::cout << "---------------------------------------------------"<<std::endl;
+
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) 
+    {
+      std::cout << "Error finalizing statement (SELECT)" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+    return SQLITE_OK;
+ 
+  }
+
 };
-
-
 #endif

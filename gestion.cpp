@@ -49,7 +49,7 @@ void vaciarClientes()
 {
    result=dbConnector.vaciarClientes();
     if (result != SQLITE_OK) {
-      std::cout << "Error deleting all countries" << std::endl;
+      std::cout << "Error deleting all clientes" << std::endl;
       
     }
 }
@@ -80,7 +80,7 @@ void listaLibros()
 
   result = dbConnector.listaLibros();
   if (result != SQLITE_OK) {
-    std::cout << "Error getting all clientes" << std::endl;
+    std::cout << "Error getting all libros" << std::endl;
     
   }
 }
@@ -89,7 +89,36 @@ void vaciarLibros()
 {
    result=dbConnector.vaciarLibros();
     if (result != SQLITE_OK) {
-      std::cout << "Error deleting all countries" << std::endl;
+      std::cout << "Error deleting all libros" << std::endl;
       
     }
 }
+void buscarLibro()
+{
+
+  result = dbConnector.buscarLibro();
+  if (result != SQLITE_OK) {
+    std::cout << "Error getting all libros" << std::endl;
+    
+  }
+}
+void buscarCliente()
+{
+
+  result = dbConnector.buscarCliente();
+  if (result != SQLITE_OK) {
+    std::cout << "Error getting all clientes" << std::endl;
+    
+  }
+}
+
+void alquilar()
+{
+
+  result = dbConnector.alquilar();
+  if (result != SQLITE_OK) {
+    std::cout << "Error getting alquilar" << std::endl;
+    
+  }
+}
+
