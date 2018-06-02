@@ -13,4 +13,8 @@ void nuevoCliente(int dni, string nombre, string apellido, int edad, int curso);
 void listaClientes();
 void vaciarClientes();
 
+void nuevoLibro(int codigo, string titulo, string autor, string genero, int stock);
+void listaLibros();
+void vaciarLibros();
+
 #endif

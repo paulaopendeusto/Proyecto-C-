@@ -45,11 +45,49 @@ void listaClientes()
     
   }
 }
-
-
 void vaciarClientes()
 {
    result=dbConnector.vaciarClientes();
+    if (result != SQLITE_OK) {
+      std::cout << "Error deleting all countries" << std::endl;
+      
+    }
+}
+void nuevoLibro(int codigo, std :: string titulo, std :: string autor, std :: string genero, int stock)
+{  
+  cout << "Titulo: ";
+  cin >> titulo;
+  cout << "Autor: ";
+  cin >> autor;
+  cout << "Genero: ";
+  cin >> genero;
+  cout << "Stock: ";
+  cin >> stock;
+  cout << "Codigo: ";
+  cin >> codigo;
+
+  result = dbConnector.nuevoLibro(codigo, titulo, autor, genero, stock);
+  if (result != SQLITE_OK) {
+    std::cout << "Error " << std::endl;
+  
+    }
+
+      
+}
+
+void listaLibros()
+{
+
+  result = dbConnector.listaLibros();
+  if (result != SQLITE_OK) {
+    std::cout << "Error getting all clientes" << std::endl;
+    
+  }
+}
+
+void vaciarLibros()
+{
+   result=dbConnector.vaciarLibros();
     if (result != SQLITE_OK) {
       std::cout << "Error deleting all countries" << std::endl;
       
