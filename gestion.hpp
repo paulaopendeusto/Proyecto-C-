@@ -21,5 +21,7 @@ void buscarLibro();
 void buscarCliente();
 
 void alquilar();
+void listaAlquiler();
+void vaciarAlquiler();
 
 #endif

@@ -122,3 +122,20 @@ void alquilar()
   }
 }
 
+void listaAlquiler()
+{
+
+  result = dbConnector.listaAlquiler();
+  if (result != SQLITE_OK) {
+    std::cout << "Error getting alquilar" << std::endl;
+    
+  }
+}
+void vaciarAlquiler()
+{
+   result=dbConnector.vaciarAlquiler();
+    if (result != SQLITE_OK) {
+      std::cout << "Error deleting all libros" << std::endl;
+      
+    }
+}

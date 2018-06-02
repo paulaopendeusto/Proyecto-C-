@@ -395,6 +395,7 @@ int buscarLibro()
     int stock;
     int dnic; //dni del cliente introducido
     char nombre[100];
+    bool bl=false;
 
 
     listaLibros();
@@ -408,23 +409,23 @@ int buscarLibro()
       result = sqlite3_step(stmt);
       if (result == SQLITE_ROW) 
       {
-                 
-        if(cl==sqlite3_column_int(stmt,0))
+        codigo=sqlite3_column_int(stmt, 0);  
+        if(cl==codigo)
         {
+          bl=true;
           strcpy(titulo, (char *) sqlite3_column_text(stmt, 1));
           stock=sqlite3_column_int(stmt,4);
           cout <<"Libro seleccionado -->  CODIGO: " << cl << " Titulo: " << titulo <<endl;
 
         }
-        else
-        {
-          cout<<"No existe ningun libro con ese codigo"<<endl;
-          buscarLibro();
-        }
-
+       
       }
     } while (result == SQLITE_ROW);
 
+    if(bl==false)
+    {
+      cout<<"No hay ningún libro registrado codigo"<<endl;
+    }
     
     result = sqlite3_finalize(stmt);
     if (result != SQLITE_OK) 
@@ -435,7 +436,7 @@ int buscarLibro()
     }
    
 
-    return cl;
+    return codigo;
     return SQLITE_OK;
   }
 
@@ -455,6 +456,7 @@ int buscarCliente()
 
     int dnic; //dni del cliente introducido
     char nombre[100];
+    int dni;
 
 
     cout<< "Introduce el dni ppara realizar la reserva"<<endl;
@@ -462,23 +464,18 @@ int buscarCliente()
 
 
      do 
-    {
+     {
       result = sqlite3_step(stmt);
       if (result == SQLITE_ROW) 
-      {
-                 
-        if(dnic==sqlite3_column_int(stmt,0))
+      {      
+          dni=sqlite3_column_int(stmt,0);
+
+        if(dnic==dni)
         {
           strcpy(nombre, (char *) sqlite3_column_text(stmt, 1));
           cout <<"Eres tu? -->  dni: " << dnic << " Nombre: " << nombre <<endl;
 
         }
-        else
-        {
-          cout<<"No existe ningun cliente con ese dni"<<endl;
-          buscarCliente();
-        }
-
       }
     } while (result == SQLITE_ROW);
 
@@ -491,8 +488,8 @@ int buscarCliente()
       return result;
     }
    
-
-    return dnic;
+    cout<<dni<<endl;
+    return dni;
     return SQLITE_OK;
   }
 
@@ -504,9 +501,16 @@ int buscarCliente()
     int stock;
 
     codigo=buscarLibro();
+
     
     dni= buscarCliente();
 
+    if(codigo==0|| dni ==0)
+    {
+      cout<<"Se acabo"<<endl;
+    }
+    else
+    {
 
     sqlite3_stmt *stmt;
 
@@ -550,11 +554,96 @@ int buscarCliente()
       std::cout << "Error finalizing statement (SELECT)" << std::endl;
       std::cout << sqlite3_errmsg(db) << std::endl;
       return result;
-    }
+    }}
 
     return SQLITE_OK;
  
   }
+
+int listaAlquiler() 
+  {
+    sqlite3_stmt *stmt;
+
+    char sql[] = "select dni, codigo from alquiler";
+
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    if (result != SQLITE_OK) {
+      std::cout << "Error preparing statement (SELECT)" << std::endl;      
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+    std::cout << "SQL query prepared (SELECT)" << std::endl;
+
+    int codigo;
+    int dni;
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "Lista de Clientes de la blibioteca de la Universidad de Deusto" << std::endl;
+
+    do 
+    {
+      result = sqlite3_step(stmt);
+      if (result == SQLITE_ROW) 
+      {
+        dni = sqlite3_column_int(stmt, 0);
+        codigo = sqlite3_column_int(stmt, 1);
+        
+        std::cout << "DNI: " << dni << " CODIGO: " << codigo <<std::endl;
+      }
+    } while (result == SQLITE_ROW);
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) 
+    {
+      std::cout << "Error finalizing statement (SELECT)" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+    std::cout << "Prepared statement finalized (SELECT)" << std::endl;
+
+    return SQLITE_OK;
+  }
+
+  int vaciarAlquiler()
+  {
+     sqlite3_stmt *stmt;
+
+    char sql[] = "delete from alquiler";
+
+    int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+    if (result != SQLITE_OK) 
+    {
+      std::cout << "Error preparing statement (DELETE)" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+
+    result = sqlite3_step(stmt);
+    if (result != SQLITE_DONE) {
+      std::cout << "Error deleting data (DELETE)" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+    result = sqlite3_finalize(stmt);
+    if (result != SQLITE_OK) {
+      std::cout << "Error finalizing statement (DELETE)" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
+   
+
+    return SQLITE_OK;
+  }
+
 
 };
 #endif

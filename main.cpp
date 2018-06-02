@@ -71,9 +71,10 @@ int menuAdministrador(void)
 		printf("2. Lista de clientes de la biblioteca de Deusto\n");
 		printf("3. Introducir un nuevo cliente\n");
 		printf("4. Introducir un nuevo libro \n");
-		printf("5. Buscar \n");
-		printf("6. Eliminar todos los clientes\n");
-		printf("7. EXIT\n");
+		printf("5. Alquilar \n");
+		printf("6. Lista alquilar\n");
+		printf("7. vaciar\n");
+		printf("8. EXIT\n" );
 		printf("\n");
 		
 		fgets(str, 50, stdin);
@@ -81,9 +82,9 @@ int menuAdministrador(void)
 		len = sscanf(str, "%d", &option); 
 		printf("\n");
 
-	}while ((len == 0 && str[0] != '7') || (len > 0 && (option > 7 || option < 1)));
+	}while ((len == 0 && str[0] != '8') || (len > 0 && (option > 8 || option < 1)));
 	
-	return (str[0] == '7')?0:option;
+	return (str[0] == '8')?0:option;
 
 }
 
@@ -136,7 +137,11 @@ int main(int argc, char **argv, char **vectorClientes)
 					break;
 
 					case 6: 
-					vaciarClientes();
+					listaAlquiler();
+					break;
+
+					case 7:
+					vaciarAlquiler();
 					break;
 					
 
