@@ -39,10 +39,9 @@ int menuCliente(void)
 		
 		printf("1. Lista de libros disponibles para alquilar\n");
 		printf("2. Alquilar libro\n");
-		printf("3. Darse de baja de la aplicacion\n");
-		printf("4. Puntuar la biblioteca de deusto\n");
-		printf("5. Ver valoraciones\n");
-		printf("6. EXIT\n");
+		printf("3. Puntuar la biblioteca de deusto\n");
+		printf("4. Ver valoraciones\n");
+		printf("5. EXIT\n");
 		printf("\n");
 		
 		fgets(str, 50, stdin);
@@ -50,9 +49,9 @@ int menuCliente(void)
 		len = sscanf(str, "%d", &option); 
 		printf("\n");
 
-	}while ((len == 0 && str[0] != '6') || (len > 0 && (option > 6 || option < 1)));
+	}while ((len == 0 && str[0] != '5') || (len > 0 && (option > 5 || option < 1)));
 	
-	return (str[0] == '6')?0:option;
+	return (str[0] == '5')?0:option;
 
 }
 
@@ -75,7 +74,8 @@ int menuAdministrador(void)
 		printf("4. Introducir un nuevo libro \n");
 		printf("5. Lista alquilar\n");
 		printf("6. Eliminar un libro\n");
-		printf("7. EXIT\n" );
+		printf("7. Eliminar un cliente\n");
+		printf("8. EXIT\n" );
 		printf("\n");
 		
 		fgets(str, 50, stdin);
@@ -83,9 +83,9 @@ int menuAdministrador(void)
 		len = sscanf(str, "%d", &option); 
 		printf("\n");
 
-	}while ((len == 0 && str[0] != '7') || (len > 0 && (option > 7 || option < 1)));
+	}while ((len == 0 && str[0] != '8') || (len > 0 && (option > 8 || option < 1)));
 	
-	return (str[0] == '7')?0:option;
+	return (str[0] == '8')?0:option;
 
 }
 
@@ -149,6 +149,15 @@ int main(int argc, char **argv)
 						break;
 					}
 
+					case 7:
+					{
+						string nombre;
+						cout<<"Inserta el nombre del cliente a borrar";
+						getline(cin, nombre);
+						vaciarClientes(nombre);
+						break;
+					}
+
 					default:
 					return -1;
 					break;
@@ -178,19 +187,10 @@ int main(int argc, char **argv)
 						break;
 
 						case 3:
-						{
-							string nombre;
-							cout<<"Inserta el nombre del cliente a borrar";
-							getline(cin, nombre);
-							vaciarClientes(nombre);
-							break;
-						}
-
-						case 4:
 						valorarBiblioteca();
 						break;
 
-						case 5: 
+						case 4: 
 						verValoraciones();
 						break;
 
