@@ -146,54 +146,52 @@ void vaciarAlquiler()
 void valorarBiblioteca()
 {
     int valoracion;
-    int valoracionf;
+    cout<<"Valora la biblioteca de deusto del 1 al 10";
+    cin>>valoracion;
+  
 
-    FILE* file;
+  ofstream fs;
+  fs.open("Valoraciones.txt", ios::app);//ios:app para que escriba al final 
 
-    file=fopen("Valoraciones.txt", "w");
-    if(file==NULL)
-    {
-      file=fopen("Valoraciones.txt", "w");
-      do{
-        cout<<"Valora la biblioteca de deusto del 1 al 10";
-        cin>>valoracion;
 
-        if(valoracion >=0 && valoracion <=10)
-        {
-          fprintf(file, "%i", valoracion);
-        }else{
-          cout<<"La valoracion tiene que estar contenida entre el 1 y el 10" << endl;
+  fs << "Valoracion" << valoracion << endl;  
+    
+  fs.close();
+  
+  cout << "Esta es la valoracion guardada: " << endl;
+  cout << endl << valoracion << endl;
+    cout << "VALORACION GUARDADA" << endl<<endl;
 
-        }
+}
+       
 
-      }while(valoracion < 0 || valoracion>10);
-    }
-else
+
+int verValoraciones()
 {
-  char str[10];
-      file=fopen("Valoraciones.txt","r");
+  
+  string line;
+  ifstream myFile("Valoraciones.txt");
 
-      while(fgets(str,10,file)!=NULL)
-      {
-        clear_if_needed(str);
+  
+  cout<<"Leyendo valoraciones...."<<endl;
+  cout<<"________________________________________________________"<< endl;
 
-        sscanf(str,"%i",&valoracionf);
-      }
-      fclose(file);
-      
-      file=fopen("Valoraciones.txt","w");
-      do{
-      cout<<"Como valorarias a la biblioteca de deusto ";
-      cin>>valoracion;
-      if(valoracion >=0 && valoracion <=10){
-      valoracionf += valoracion;  
-      fprintf(file,"%i",valoracionf);
-      }else{
-        cout << "La puntuacion ha de ser mayor que 0 y menor que 10" << endl;
-      }
-      }while(valoracion <0 || valoracion >10);
-    }
-    fclose(file);
+
+
+  
+  while(getline(myFile,line))
+  {
+
+    cout<< line <<endl;
+  
+  } 
+
+  
+  
+  cout<<endl;
+  myFile.close();
+
+
 }
 
 

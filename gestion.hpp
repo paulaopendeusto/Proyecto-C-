@@ -24,5 +24,6 @@ void listaAlquiler();
 void vaciarAlquiler();
 
 void valorarBiblioteca();
+int verValoraciones();
 
 #endif
