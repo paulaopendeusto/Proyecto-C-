@@ -11,11 +11,11 @@ using namespace std;
 
 void nuevoCliente(int dni, string nombre, string apellido, int edad, int curso);
 void listaClientes();
-void vaciarClientes();
+void vaciarClientes(string nombre);
 
 void nuevoLibro(int codigo, string titulo, string autor, string genero, int stock);
 void listaLibros();
-void vaciarLibros();
+void vaciarLibros(string titulo);
 
 void buscarLibro();
 void buscarCliente();
@@ -23,5 +23,7 @@ void buscarCliente();
 void alquilar();
 void listaAlquiler();
 void vaciarAlquiler();
+
+
 
 #endif

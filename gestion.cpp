@@ -33,7 +33,7 @@ void nuevoCliente(int dni, std :: string nombre, std :: string apellido, int eda
   
     }
 
-     	
+      
 }
 
 void listaClientes()
@@ -45,13 +45,14 @@ void listaClientes()
     
   }
 }
-void vaciarClientes()
+void vaciarClientes(std :: string nombre)
 {
-   result=dbConnector.vaciarClientes();
-    if (result != SQLITE_OK) {
-      std::cout << "Error deleting all clientes" << std::endl;
+
+  result = dbConnector.vaciarClientes(nombre); 
+  if (result != SQLITE_OK) {
+    std::cout << "Error deleting all clientes" << std::endl;
       
-    }
+  }
 }
 void nuevoLibro(int codigo, std :: string titulo, std :: string autor, std :: string genero, int stock)
 {  
@@ -85,9 +86,9 @@ void listaLibros()
   }
 }
 
-void vaciarLibros()
+void vaciarLibros(std :: string titulo)
 {
-   result=dbConnector.vaciarLibros();
+   result=dbConnector.vaciarLibros(titulo);
     if (result != SQLITE_OK) {
       std::cout << "Error deleting all libros" << std::endl;
       
@@ -139,3 +140,5 @@ void vaciarAlquiler()
       
     }
 }
+
+

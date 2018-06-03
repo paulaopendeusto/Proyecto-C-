@@ -58,7 +58,7 @@ public:
     if (result != SQLITE_OK) {
       std::cout << "Error closing database" << std::endl;
       std::cout << sqlite3_errmsg(db) << std::endl;
-    }	
+    } 
   }
 
 
@@ -184,11 +184,11 @@ int nuevoCliente(int dni, string nombre, string apellido, int edad, int curso)
   }
 
 
-  int vaciarClientes()
+  int vaciarClientes(string borrar)
   {
      sqlite3_stmt *stmt;
 
-    char sql[] = "delete from cliente";
+    char sql[] = "delete from cliente where nombre=?";
 
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
     if (result != SQLITE_OK) 
@@ -200,9 +200,16 @@ int nuevoCliente(int dni, string nombre, string apellido, int edad, int curso)
 
     std::cout << "SQL query prepared (DELETE)" << std::endl;
 
+     result = sqlite3_bind_text(stmt, 1, borrar.c_str(), borrar.length(), SQLITE_STATIC);
+    if (result != SQLITE_OK) {
+      std::cout << "Error binding parameters" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
     result = sqlite3_step(stmt);
     if (result != SQLITE_DONE) {
-      std::cout << "Error deleting data (DELETE)" << std::endl;
+      std::cout << "Error deleting data" << std::endl;
       std::cout << sqlite3_errmsg(db) << std::endl;
       return result;
     }
@@ -339,11 +346,12 @@ int nuevoLibro(int codigo, string titulo, string autor, string genero, int stock
 
     return SQLITE_OK;
   }
-  int vaciarLibros()
+  int vaciarLibros(string borrar)
   {
+
      sqlite3_stmt *stmt;
 
-    char sql[] = "delete from libro";
+    char sql[] = "delete from libro where titulo=?";
 
     int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
     if (result != SQLITE_OK) 
@@ -355,9 +363,16 @@ int nuevoLibro(int codigo, string titulo, string autor, string genero, int stock
 
     std::cout << "SQL query prepared (DELETE)" << std::endl;
 
+     result = sqlite3_bind_text(stmt, 1, borrar.c_str(), borrar.length(), SQLITE_STATIC);
+    if (result != SQLITE_OK) {
+      std::cout << "Error binding parameters" << std::endl;
+      std::cout << sqlite3_errmsg(db) << std::endl;
+      return result;
+    }
+
     result = sqlite3_step(stmt);
     if (result != SQLITE_DONE) {
-      std::cout << "Error deleting data (DELETE)" << std::endl;
+      std::cout << "Error deleting data" << std::endl;
       std::cout << sqlite3_errmsg(db) << std::endl;
       return result;
     }
