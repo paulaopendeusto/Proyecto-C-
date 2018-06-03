@@ -40,7 +40,8 @@ int menuCliente(void)
 		printf("1. Lista de libros disponibles para alquilar\n");
 		printf("2. Alquilar libro\n");
 		printf("3. Darse de baja de la aplicacion\n");
-		printf("4. EXIT\n");
+		printf("4. Puntuar la biblioteca de deusto\n");
+		printf("5. EXIT\n");
 		printf("\n");
 		
 		fgets(str, 50, stdin);
@@ -48,9 +49,9 @@ int menuCliente(void)
 		len = sscanf(str, "%d", &option); 
 		printf("\n");
 
-	}while ((len == 0 && str[0] != '4') || (len > 0 && (option > 4 || option < 1)));
+	}while ((len == 0 && str[0] != '5') || (len > 0 && (option > 5 || option < 1)));
 	
-	return (str[0] == '4')?0:option;
+	return (str[0] == '5')?0:option;
 
 }
 
@@ -175,9 +176,14 @@ int main(int argc, char **argv, char **vectorClientes)
 
 					option = menuCliente();
 
-				
+		
+
 					switch (option)
 					{
+						case 4:
+						valorarBiblioteca();
+						break;
+
 						default:
 						return -1;
 						break;

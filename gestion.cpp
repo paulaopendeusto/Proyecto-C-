@@ -14,6 +14,15 @@ using namespace std;
 DBConnector dbConnector("test.sqlite");
 int result;
 
+void clear_if_needed(char *str)
+{
+    if (str[strlen(str) - 1] != '\n')
+    {
+        int c;    
+        while ( (c = getchar()) != EOF && c != '\n');
+    }
+}
+
 void nuevoCliente(int dni, std :: string nombre, std :: string apellido, int edad, int curso)
 {  
   cout << "Nombre: ";
@@ -139,6 +148,59 @@ void vaciarAlquiler()
       std::cout << "Error deleting all libros" << std::endl;
       
     }
+}
+
+void valorarBiblioteca()
+{
+    int valoracion;
+    int valoracionf;
+
+    FILE* file;
+
+    file=fopen("Valoraciones.txt", "w");
+    if(file==NULL)
+    {
+      file=fopen("Valoraciones.txt", "w");
+      do{
+        cout<<"Valora la biblioteca de deusto del 1 al 10";
+        cin>>valoracion;
+
+        if(valoracion >=0 && valoracion <=10)
+        {
+          fprintf(file, "%i", valoracion);
+        }else{
+          cout<<"La valoracion tiene que estar contenida entre el 1 y el 10" << endl;
+
+        }
+
+      }while(valoracion < 0 || valoracion>10);
+    }
+else
+{
+  char str[10];
+      file=fopen("Valoraciones.txt","r");
+
+      while(fgets(str,10,file)!=NULL)
+      {
+        clear_if_needed(str);
+
+        sscanf(str,"%i",&valoracionf);
+      }
+      fclose(file);
+      
+      file=fopen("Valoraciones.txt","w");
+      do{
+      cout<<"Como valorarias a la biblioteca de deusto ";
+      cin>>valoracion;
+      if(valoracion >=0 && valoracion <=10){
+      valoracionf += valoracion;  
+      fprintf(file,"%i",valoracionf);
+      }else{
+        cout << "La puntuacion ha de ser mayor que 0 y menor que 10" << endl;
+      }
+      }while(valoracion <0 || valoracion >10);
+    }
+    fclose(file);
 }
 
 
