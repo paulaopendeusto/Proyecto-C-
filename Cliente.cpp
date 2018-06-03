@@ -1,36 +1,62 @@
-#include "Cliente.hpp"
-#include <iostream>
-#include <string.h>
-#include <ctype.h>
+#include "Cliente.h"
 
-Cliente::Cliente(const string nombre, const string apellido, const int edad, const string DNI, const int curso)
+
+using namespace std;
+
+
+Cliente::Cliente(): Persona()
 {
-	this->nombre= nombre;
-	this->apellido=apellido;
-	this->edad=edad;
-	this->DNI=DNI;
-	this->curso=curso;
+	this->edad = 0;
+	this->DNI = 0;
+	this->curso = 0;
+}
+Cliente::Cliente(string nombre, string apellido, int edad, int DNI, int curso): Persona(nombre, apellido)
+{
+	this->edad = edad;
+	this->DNI = DNI;
+	this->curso = curso;
+	
 }
 
-istream& operator<<(istream& in, Cliente& c)
+Cliente::~Cliente()
+{}
+
+
+int Cliente::getEdad() const
 {
-	cout << "Nombre: ";
-	cin >> c.nombre;
-	cout << "Apellido: ";
-	cin >> c.apellido;
-	cout << "Edad: ";
-	cin >> c.edad;
-	cout << "DNI: ";
-	cin >> c.DNI;
-	cout << "Curso: ";
-	cin >> c.curso;
-	cout << endl;
-	return in;
+	return edad;
+}
+int Cliente::getDNI() const
+{
+	return DNI;
+}
+int Cliente::getCurso() const
+{
+	return curso;
 }
 
-ostream& operator<<(ostream& out, const Cliente& c)
+void Cliente::mostrarDatos() const
 {
-	out << c.getNombre() << " " << c.getApellido() << " " << c.getEdad() << " " << c.getDNI() << " " << c.getCurso();
+	cout << "Datos del Cliente: (" << this->edad <<","<<this->DNI << "," <<this->curso <<")" << endl;
+}
 
+void Cliente::setEdad(int edad)
+{
+	this->edad = edad;
+}
+void Cliente::setDNI(int DNI)
+{
+	this->DNI = DNI;
+}
+void Cliente::setCurso(int curso)
+{
+	this->curso = curso;
+}
+
+
+
+ostream& operator<<(ostream &out, const Cliente p)
+{
+	out << "\t" << p.getNombre() << endl;
 	return out;
 }

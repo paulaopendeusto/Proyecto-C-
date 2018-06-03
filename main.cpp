@@ -3,9 +3,7 @@
 #include <stdlib.h>
 #include "gestion.h"
 #include "gestion.hpp"
-#include "Persona.hpp"
-#include "Admin.hpp"
-#include "Cliente.hpp"
+#include "Cliente.h"
 #include "DBConnector.hpp"
 
 #define MAX_LENGHT 50
@@ -17,6 +15,8 @@ string nombre;
 string apellido;
 int edad;
 int curso;
+
+Cliente objCliente;
 
 //LIBRO//
 int codigo;
@@ -71,7 +71,7 @@ int menuAdministrador(void)
 		
 		printf("1. Lista de libros disponibles para alquilar\n");
 		printf("2. Lista de clientes de la biblioteca de Deusto\n");
-		printf("3. Introducir un nuevo libro \n");
+		printf("3. Introducir un nuevo cliente \n");
 		printf("4. Introducir un nuevo libro \n");
 		printf("5. Lista alquilar\n");
 		printf("6. Eliminar un libro\n");
@@ -100,7 +100,7 @@ int main(int argc, char **argv)
 	do
 	{
 	 printf("\n\n\n\nBIENVENIDO A LA BIBLIOTECA DE DEUSTO\n");
-	 printf("Escriba el nombre de usuario por favor (usuario - empleado)\n");
+	 printf("Escriba el nombre de usuario por favor (cliente - admin)\n");
 	 gets(n);
 	 printf("Escriba su contrasena\n");
 	 gets(c);
@@ -125,7 +125,8 @@ int main(int argc, char **argv)
 					break;
 					
 					case 3:
-					nuevoCliente(dni, nombre, apellido, edad, curso);
+					//nuevoCliente(dni, nombre, apellido, edad, curso);
+					nuevoCliente(objCliente);
 					break;
 					
 					

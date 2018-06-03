@@ -1,43 +1,37 @@
-#include "Persona.hpp"
-#include "string.h"
+#include "Persona.h"
 
 using namespace std;
 
 Persona::Persona()
 {
+	this->nombre = string(""); 
+	this->apellido = string("");
 
 }
 
-Persona::Persona(const char *nombre, const char *apellido)
+Persona::Persona(string nombre, string apellido)
 {
-	this->nombre= new char[strlen(nombre) + 1];
-	strcpy(this->nombre, nombre);
-
-	this->apellido=new char[strlen(apellido)+1];
-	strcpy(this->apellido, apellido);
-}
-
-Persona::Persona(const Persona& p)
-{
-	this->nombre= new char[strlen(p.nombre)+1];
-	strcpy(this->nombre, p.nombre);
-
-	this->apellido= new char[strlen(p.apellido)+1];
-	strcpy(this->apellido, p.apellido);
+	this->nombre = nombre;
+	this->apellido = apellido;
 }
 
 Persona::~Persona()
-{
-	delete[] nombre;
-	delete[] apellido;
-}
+{}
 
-const char* Persona::getNombre() const
+string Persona::getNombre() const
 {
 	return nombre;
 }
-
-const char* Persona::getApellido() const
+string Persona::getApellido() const
 {
 	return apellido;
+}
+
+void Persona::setNombre(string nombre)
+{
+	this->nombre = nombre;
+}
+void Persona::setApellido(string apellido)
+{
+	this->apellido = apellido;
 }

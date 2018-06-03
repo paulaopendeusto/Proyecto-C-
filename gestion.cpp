@@ -1,7 +1,5 @@
 #include <iostream>
-#include "Admin.hpp"
-#include "Cliente.hpp"
-#include "Persona.hpp"
+#include "Cliente.h"
 #include "gestion.hpp"
 #include <iostream>
 #include <fstream>
@@ -23,8 +21,15 @@ void clear_if_needed(char *str)
     }
 }
 
-void nuevoCliente(int dni, std :: string nombre, std :: string apellido, int edad, int curso)
+void nuevoCliente(Cliente objCliente)
 {  
+
+ int dni;
+string nombre;
+string apellido;
+int edad;
+int curso;
+
   cout << "Nombre: ";
   cin >> nombre;
   cout << "Apellido: ";
@@ -36,7 +41,14 @@ void nuevoCliente(int dni, std :: string nombre, std :: string apellido, int eda
   cout << "Curso: ";
   cin >> curso;
 
-  result = dbConnector.nuevoCliente(dni, nombre, apellido, edad, curso);
+
+  objCliente.setNombre(nombre);
+  objCliente.setApellido(apellido);
+  objCliente.setEdad(edad);
+  objCliente.setDNI(dni);
+  objCliente.setCurso(curso);
+
+  result = dbConnector.nuevoCliente(objCliente);
   if (result != SQLITE_OK) {
     std::cout << "Error " << std::endl;
   

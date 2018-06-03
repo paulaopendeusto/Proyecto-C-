@@ -63,7 +63,9 @@ public:
   }
 
 
-int nuevoCliente(int dni, string nombre, string apellido, int edad, int curso)
+
+
+  int nuevoCliente(Cliente objCliente)
 {
   sqlite3_stmt *stmt;
 
@@ -76,34 +78,34 @@ int nuevoCliente(int dni, string nombre, string apellido, int edad, int curso)
     }
 
    
-    result = sqlite3_bind_int(stmt, 1, dni);
+    result = sqlite3_bind_int(stmt, 1, objCliente.getDNI());
     if (result != SQLITE_OK) {
       std::cout << "Error binding parameters" << std::endl;
       std::cout << sqlite3_errmsg(db) << std::endl;
       return result;
     }
 
-    result = sqlite3_bind_text(stmt, 2, nombre.c_str(), nombre.length(), SQLITE_STATIC);
+    result = sqlite3_bind_text(stmt, 2, objCliente.getNombre().c_str(), objCliente.getNombre().length(), SQLITE_STATIC);
     if (result != SQLITE_OK) {
       std::cout << "Error binding parameters" << std::endl;
       std::cout << sqlite3_errmsg(db) << std::endl;
       return result;
     }
 
-    result = sqlite3_bind_text(stmt, 3, apellido.c_str(), apellido.length(), SQLITE_STATIC);
+    result = sqlite3_bind_text(stmt, 3, objCliente.getApellido().c_str(), objCliente.getApellido().length(), SQLITE_STATIC);
     if (result != SQLITE_OK) {
       std::cout << "Error binding parameters" << std::endl;
       std::cout << sqlite3_errmsg(db) << std::endl;
       return result;
     }
-    result = sqlite3_bind_int(stmt, 4, edad);
+    result = sqlite3_bind_int(stmt, 4, objCliente.getEdad());
     if (result != SQLITE_OK) {
       std::cout << "Error binding parameters" << std::endl;
       std::cout << sqlite3_errmsg(db) << std::endl;
       return result;
     }
 
-    result = sqlite3_bind_int(stmt, 5, curso);
+    result = sqlite3_bind_int(stmt, 5, objCliente.getCurso());
     if (result != SQLITE_OK) {
       std::cout << "Error binding parameters" << std::endl;
       std::cout << sqlite3_errmsg(db) << std::endl;
