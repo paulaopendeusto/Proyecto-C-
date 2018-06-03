@@ -103,29 +103,20 @@ void vaciarLibros(std :: string titulo)
       
     }
 }
-void buscarLibro()
+
+void alquilerLibro()
 {
 
-  result = dbConnector.buscarLibro();
+  result = dbConnector.alquilerLibro();
   if (result != SQLITE_OK) {
     std::cout << "Error getting all libros" << std::endl;
     
   }
 }
-void buscarCliente()
+void alquilar(int dni, string nombre, int codigo, string titulo, int stock)
 {
 
-  result = dbConnector.buscarCliente();
-  if (result != SQLITE_OK) {
-    std::cout << "Error getting all clientes" << std::endl;
-    
-  }
-}
-
-void alquilar()
-{
-
-  result = dbConnector.alquilar();
+  result = dbConnector.alquilar(dni, nombre, codigo,titulo,stock);
   if (result != SQLITE_OK) {
     std::cout << "Error getting alquilar" << std::endl;
     
@@ -149,6 +140,8 @@ void vaciarAlquiler()
       
     }
 }
+
+
 
 void valorarBiblioteca()
 {

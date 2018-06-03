@@ -135,7 +135,7 @@ int main(int argc, char **argv, char **vectorClientes)
 					break;
 
 					case 5:
-					alquilar();
+					alquilerLibro();
 					break;
 
 					case 6: 
