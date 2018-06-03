@@ -71,13 +71,11 @@ int menuAdministrador(void)
 		
 		printf("1. Lista de libros disponibles para alquilar\n");
 		printf("2. Lista de clientes de la biblioteca de Deusto\n");
-		printf("3. Introducir un nuevo cliente\n");
+		printf("3. Introducir un nuevo libro \n");
 		printf("4. Introducir un nuevo libro \n");
-		printf("5. Alquilar \n");
-		printf("6. Lista alquilar\n");
-		printf("7. Eliminar un cliente\n");
-		printf("8. Eliminar un libro\n");
-		printf("9. EXIT\n" );
+		printf("5. Lista alquilar\n");
+		printf("6. Eliminar un libro\n");
+		printf("7. EXIT\n" );
 		printf("\n");
 		
 		fgets(str, 50, stdin);
@@ -85,14 +83,14 @@ int menuAdministrador(void)
 		len = sscanf(str, "%d", &option); 
 		printf("\n");
 
-	}while ((len == 0 && str[0] != '9') || (len > 0 && (option > 9 || option < 1)));
+	}while ((len == 0 && str[0] != '7') || (len > 0 && (option > 7 || option < 1)));
 	
-	return (str[0] == '9')?0:option;
+	return (str[0] == '7')?0:option;
 
 }
 
 
-int main(int argc, char **argv, char **vectorClientes)
+int main(int argc, char **argv)
 {
 	int option;
 	int total = 0;
@@ -123,7 +121,6 @@ int main(int argc, char **argv, char **vectorClientes)
 					break;
 
 					case 2:
-
 					listaClientes();
 					break;
 					
@@ -131,34 +128,24 @@ int main(int argc, char **argv, char **vectorClientes)
 					nuevoCliente(dni, nombre, apellido, edad, curso);
 					break;
 					
+					
 					case 4:
 					nuevoLibro(codigo, titulo, autor, genero, stock);
 					break;
 
-					case 5:
-					alquilerLibro();
-					break;
-
-					case 6: 
+					
+					case 5: 
 					listaAlquiler();
 					break;
+				
 
-					case 7:
+					case 6:
 					{
-					string nombre;
-					cout<<"Inserta el nombre del cliente a borrar";
-					getline(cin, nombre);
-					vaciarClientes(nombre);
-					break;
-					}
-
-					case 8:
-					{
-					string titulo;
-					cout<<"Inserta el titulo del libro a borrar";
-					getline(cin, titulo);
-					vaciarLibros(titulo);
-					break;
+						string titulo;
+						cout<<"Inserta el titulo del libro a borrar";
+						getline(cin, titulo);
+						vaciarLibros(titulo);
+						break;
 					}
 
 					default:
@@ -181,6 +168,23 @@ int main(int argc, char **argv, char **vectorClientes)
 
 					switch (option)
 					{
+						case 1:
+						listaLibros();
+						break;
+
+						case 2:
+						alquilerLibro();
+						break;
+
+						case 3:
+						{
+							string nombre;
+							cout<<"Inserta el nombre del cliente a borrar";
+							getline(cin, nombre);
+							vaciarClientes(nombre);
+							break;
+						}
+
 						case 4:
 						valorarBiblioteca();
 						break;
